@@ -1,3 +1,4 @@
+import logo from "../assets/logo.png"
 const Navbar = () => {
   return (
     <div className="navbar text-white fixed z-10 bg-[#00000060]">
@@ -40,6 +41,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+        <img className="w-7" src={logo} alt="" />
         <a className="text-xl font-semibold">Bistro Boss</a>
       </div>
       <div className="navbar-center hidden lg:flex">
