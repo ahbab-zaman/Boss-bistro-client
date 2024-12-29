@@ -1,4 +1,5 @@
-import logo from "../assets/logo.png"
+import { NavLink } from "react-router-dom";
+import logo from "../assets/logo.png";
 const Navbar = () => {
   return (
     <div className="navbar text-white fixed z-10 bg-[#00000060]">
@@ -47,19 +48,34 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 uppercase font-semibold">
           <li>
-            <a>Home</a>
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "bg-yellow-400 font-bold" : "")}
+            >
+              Home
+            </NavLink>
           </li>
-          <li>
+          {/* <li>
             <a>Contact Us</a>
           </li>
           <li>
             <a>Dashboard</a>
+          </li> */}
+          <li>
+            <NavLink
+              to="/menu"
+              className={({ isActive }) => (isActive ? "text-yellow-400 font-bold" : "")}
+            >
+              OUR MENU
+            </NavLink>
           </li>
           <li>
-            <a>Our Menu</a>
-          </li>
-          <li>
-            <a>Our Shop</a>
+            <NavLink
+              to="/shop"
+              className={({ isActive }) => (isActive ? "text-yellow-400 font-bold" : "")}
+            >
+              OUR SHOP
+            </NavLink>
           </li>
         </ul>
       </div>

@@ -5,6 +5,7 @@ import ChefRecommend from "../../Components/ChefRecommend/ChefRecommend";
 import Contact from "../../Components/Contact/Contact";
 import MenuBanner from "../../Components/MenuBanner/Menubanner";
 import MenuItem from "../../Components/MenuItem/MenuItem";
+import Testimonial from "../../Components/Testimonial/Testimonial";
 
 const Home = () => {
     return (
@@ -16,6 +17,7 @@ const Home = () => {
             <Contact></Contact>
             <ChefRecommend></ChefRecommend>
             <MenuBanner></MenuBanner>
+            <Testimonial></Testimonial>
         </div>
     );
 };
