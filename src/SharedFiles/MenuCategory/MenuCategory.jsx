@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Cover from "../../Components/Cover/Cover";
 import PopularMenu from "../../Components/PopularMenu/PopularMenu";
 
-const MenuCategory = ({ items, title, coverImg, button }) => {
+const MenuCategory = ({ items, title, coverImg }) => {
   return (
     <div>
       {title && (
@@ -18,7 +18,7 @@ const MenuCategory = ({ items, title, coverImg, button }) => {
         ))}
       </div>
       <div className="flex justify-center items-center my-4">
-        <Link>
+        <Link to={`/shop/${title}`}>
           <button className="px-4 py-2 border-black border-b-2 rounded-xl font-bold ">
             Order Our Favorite Food
           </button>

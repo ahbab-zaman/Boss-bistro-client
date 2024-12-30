@@ -11,7 +11,7 @@ const Testimonial = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
     const fetchReviews = async () => {
-      const { data } = await axios.get("./reviews.json");
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/allReviews`);
       console.log(data);
       setReviews(data);
     };

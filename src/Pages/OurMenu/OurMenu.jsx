@@ -30,37 +30,31 @@ const OurMenu = () => {
       ></TitleSection>
       <MenuCategory items={offered}></MenuCategory>
       {/* Dessert menu */}
-      <Cover
-        coverImg={img3}
-        title={"DESSERTS"}
-        details={"Try Our Dessert Dish. Made by worlds best chef"}
-      ></Cover>
 
-      <MenuCategory items={dessert}></MenuCategory>
+      <MenuCategory
+        items={dessert}
+        title={"desserts"}
+        coverImg={img3}
+      ></MenuCategory>
 
       {/* Pizza Menu */}
-      <Cover
+      <MenuCategory
+        items={pizza}
+        title={"pizza"}
         coverImg={img4}
-        title={"PIZZA"}
-        details={"Try Our Pizzas. Made by worlds best chef"}
-      ></Cover>
-      <MenuCategory items={pizza}></MenuCategory>
+      ></MenuCategory>
 
       {/* Salads Menu */}
-      <Cover
+
+      <MenuCategory
+        items={salad}
+        title={"salad"}
         coverImg={img5}
-        title={"SALADS"}
-        details={"Try Our Salads. Made by worlds best chef"}
-      ></Cover>
-      <MenuCategory items={salad}></MenuCategory>
+      ></MenuCategory>
 
       {/* Soups Menu */}
-      <Cover
-        coverImg={img6}
-        title={"SOUPS"}
-        details={"Try Our Soups. Made by worlds best chef"}
-      ></Cover>
-      <MenuCategory items={soup}></MenuCategory>
+
+      <MenuCategory items={soup} title={"soup"} coverImg={img6}></MenuCategory>
     </div>
   );
 };
