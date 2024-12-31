@@ -1,6 +1,18 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { useContext } from "react";
+import { AuthContext } from "./AuthProvider/AuthProvider";
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+    .then(() => {
+      console.log("User Logout")
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  };
   return (
     <div className="navbar text-white fixed z-10 bg-[#00000060]">
       <div className="navbar-start">
@@ -50,21 +62,19 @@ const Navbar = () => {
           <li>
             <NavLink
               to="/"
-              className={({ isActive }) => (isActive ? "bg-yellow-400 font-bold" : "")}
+              className={({ isActive }) =>
+                isActive ? "bg-yellow-400 font-bold" : ""
+              }
             >
               Home
             </NavLink>
           </li>
-          {/* <li>
-            <a>Contact Us</a>
-          </li>
-          <li>
-            <a>Dashboard</a>
-          </li> */}
           <li>
             <NavLink
               to="/menu"
-              className={({ isActive }) => (isActive ? "text-yellow-400 font-bold" : "")}
+              className={({ isActive }) =>
+                isActive ? "text-yellow-400 font-bold" : ""
+              }
             >
               OUR MENU
             </NavLink>
@@ -72,15 +82,39 @@ const Navbar = () => {
           <li>
             <NavLink
               to="/shop/salad"
-              className={({ isActive }) => (isActive ? "text-yellow-400 font-bold" : "")}
+              className={({ isActive }) =>
+                isActive ? "text-yellow-400 font-bold" : ""
+              }
             >
               OUR SHOP
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                isActive ? "text-yellow-400 font-bold" : ""
+              }
+            >
+              CONTACT US
             </NavLink>
           </li>
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">SignOut</a>
+        {user ? (
+          <Link to={"/login"}>
+            <button onClick={handleLogOut} className="bg-yellow-400 text-white font-bold px-4 py-2">
+              Logout
+            </button>
+          </Link>
+        ) : (
+          <Link to={"/login"}>
+            <button className="bg-yellow-400 text-white font-bold px-4 py-2">
+              Login
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );
