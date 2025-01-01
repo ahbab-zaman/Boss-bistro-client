@@ -2,16 +2,19 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { useContext } from "react";
 import { AuthContext } from "./AuthProvider/AuthProvider";
+import { FaCartShopping } from "react-icons/fa6";
+import useCart from "../Hooks/useCart";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
   const handleLogOut = () => {
     logOut()
-    .then(() => {
-      console.log("User Logout")
-    })
-    .catch(error => {
-      console.log(error)
-    })
+      .then(() => {
+        console.log("User Logout");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="navbar text-white fixed z-10 bg-[#00000060]">
@@ -99,12 +102,21 @@ const Navbar = () => {
               CONTACT US
             </NavLink>
           </li>
+          <li>
+            <button className="px-4 py-2 bg-yellow-500 text-black font-bold">
+              <FaCartShopping className="text-xl text-white"></FaCartShopping>
+              <div className="badge badge-secondary">+{cart.length}</div>
+            </button>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">
         {user ? (
           <Link to={"/login"}>
-            <button onClick={handleLogOut} className="bg-yellow-400 text-white font-bold px-4 py-2">
+            <button
+              onClick={handleLogOut}
+              className="bg-yellow-400 text-white font-bold px-4 py-2"
+            >
               Logout
             </button>
           </Link>

@@ -11,6 +11,7 @@ const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
+  const from = location?.state?.from?.pathname || "/";
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -23,7 +24,7 @@ const Login = () => {
       .then((res) => {
         const user = res.user;
         console.log(user);
-        navigate(location?.state ? location?.state : "/");
+        navigate(from);
       })
       .catch((error) => {
         console.log(error);
