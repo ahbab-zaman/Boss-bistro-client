@@ -7,6 +7,7 @@ import useCart from "../Hooks/useCart";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart] = useCart();
+  console.log(cart.length)
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -61,7 +62,7 @@ const Navbar = () => {
         <a className="text-xl font-semibold">Bistro Boss</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 uppercase font-semibold">
+        <ul className="menu menu-horizontal items-center px-1 uppercase font-semibold">
           <li>
             <NavLink
               to="/"
@@ -103,10 +104,12 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <button className="px-4 py-2 bg-yellow-500 text-black font-bold">
-              <FaCartShopping className="text-xl text-white"></FaCartShopping>
-              <div className="badge badge-secondary">+{cart.length}</div>
-            </button>
+            <NavLink to="/dashboard/cart">
+              <button className="px-4 py-2 bg-yellow-400 text-black font-bold flex justify-center items-center gap-2 rounded-lg">
+                <FaCartShopping className="text-xl text-white"></FaCartShopping>
+                <div className="badge badge-secondary">+{cart.length}</div>
+              </button>
+            </NavLink>
           </li>
         </ul>
       </div>
