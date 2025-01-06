@@ -1,9 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../../SharedFiles/AuthProvider/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import toast from "react-hot-toast/headless";
+import SocialLogin from "../../SharedFiles/SocialLogin/SocialLogin";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, profileUpdate } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -16,9 +21,27 @@ const Register = () => {
       .then((res) => {
         const user = res.user;
         console.log(user);
+        profileUpdate({ displayName: name, photoURL: photo, email: email })
+          .then(() => {
+            const userInfo = {
+              name: name,
+              photo: photo,
+              email: email,
+            };
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                console.log(res.data);
+                toast.success("User created successfully!");
+                navigate("/");
+              }
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
-    console.log(error);
+        console.log(error);
       });
   };
   return (
@@ -83,9 +106,15 @@ const Register = () => {
                 <button className="btn btn-primary">Register</button>
               </div>
               <div>
-                <p className="text-center">Already Have An account? <span className="text-blue-500 font-semibold"><Link to={"/login"}>Login</Link></span></p>
-            </div>
+                <p className="text-center">
+                  Already Have An account?{" "}
+                  <span className="text-blue-500 font-semibold">
+                    <Link to={"/login"}>Login</Link>
+                  </span>
+                </p>
+              </div>
             </form>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>

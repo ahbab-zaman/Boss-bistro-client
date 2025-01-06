@@ -3,13 +3,14 @@ import MainLayout from "../Layouts/MainLayout/MainLayout";
 import Home from "../Pages/Home/Home";
 import OurMenu from "../Pages/OurMenu/OurMenu";
 import OurShop from "../Pages/OurShop/OurShop";
-import Contact from "../Components/Contact/Contact";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layouts/Dashboard/Dashboard";
 import Cart from "../Pages/Cart/Cart";
+import AllUsers from "../Layouts/Dashboard/AllUsers/AllUsers";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -47,13 +48,26 @@ export const router = createBrowserRouter([
     element: <Register></Register>,
   },
   {
-    path:"dashboard",
-    element:<Dashboard></Dashboard>,
-    children:[
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    children: [
       {
-        path:'cart',
-        element:<Cart></Cart>
-      }
-    ]
-  }
+        path: "cart",
+        element: <Cart></Cart>,
+      },
+      // admin routes
+      {
+        path: "allUsers",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
+    ],
+  },
 ]);
