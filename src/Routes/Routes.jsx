@@ -11,6 +11,13 @@ import Dashboard from "../Layouts/Dashboard/Dashboard";
 import Cart from "../Pages/Cart/Cart";
 import AllUsers from "../Layouts/Dashboard/AllUsers/AllUsers";
 import AdminRoute from "./AdminRoute";
+import AddItems from "../Layouts/Dashboard/AddItems/AddItems";
+import ManageItems from "../Layouts/Dashboard/ManageItems/ManageItems";
+import UpdateItems from "../Layouts/Dashboard/UpdateItems/UpdateItems";
+import Payment from "../Layouts/Dashboard/Payment/Payment";
+import PaymentHistory from "../Layouts/Dashboard/PaymentHistory/PaymentHistory";
+import AdminHome from "../Layouts/Dashboard/AdminHome/AdminHome";
+import UserHome from "../Layouts/Dashboard/UserHome/UserHome";
 
 export const router = createBrowserRouter([
   {
@@ -56,10 +63,26 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
+        path: "userHome",
+        element: <UserHome></UserHome>,
+      },
+      {
         path: "cart",
         element: <Cart></Cart>,
       },
+      {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+      {
+        path: "payHistory",
+        element: <PaymentHistory></PaymentHistory>,
+      },
       // admin routes
+      {
+        path: "adminHome",
+        element: <AdminHome></AdminHome>,
+      },
       {
         path: "allUsers",
         element: (
@@ -67,6 +90,34 @@ export const router = createBrowserRouter([
             <AllUsers></AllUsers>
           </AdminRoute>
         ),
+      },
+      {
+        path: "addItems",
+        element: (
+          <AdminRoute>
+            {" "}
+            <AddItems></AddItems>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageItems",
+        element: (
+          <AdminRoute>
+            <ManageItems></ManageItems>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "updateItems/:id",
+        element: (
+          <AdminRoute>
+            {" "}
+            <UpdateItems></UpdateItems>
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menu/${params.id}`),
       },
     ],
   },

@@ -16,7 +16,7 @@ import useAdmin from "../../Hooks/useAdmin";
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   return (
-    <div className="flex">
+    <div className="flex ">
       <div className="w-52 min-h-screen bg-[#D1A054] py-3">
         <h2 className="text-center text-xl -ml-6 font-bold">
           BISTRO BOSS <br /> RESTAURANT
@@ -42,7 +42,7 @@ const Dashboard = () => {
                 >
                   {" "}
                   <FaUtensils></FaUtensils>
-                  add Items
+                  Add Items
                 </NavLink>
               </li>
 
@@ -82,7 +82,7 @@ const Dashboard = () => {
           ) : (
             <>
               <li className=" mb-4">
-                <NavLink className="flex items-center gap-2 text-lg font-semibold">
+                <NavLink to="/dashboard/userHome" className="flex items-center gap-2 text-lg font-semibold">
                   {" "}
                   <IoMdHome className="text-2xl"></IoMdHome>
                   User Home
@@ -96,7 +96,10 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li className=" mb-4">
-                <NavLink className="flex items-center gap-2 text-lg font-semibold">
+                <NavLink
+                  to="/dashboard/payHistory"
+                  className="flex items-center gap-2 text-lg font-semibold"
+                >
                   {" "}
                   <MdOutlinePayment className="text-2xl"></MdOutlinePayment>
                   Payment History
@@ -126,7 +129,6 @@ const Dashboard = () => {
                   My Booking
                 </NavLink>
               </li>
-              s
             </>
           )}
         </div>
@@ -179,7 +181,7 @@ const Dashboard = () => {
           </li>
         </div>
       </div>
-      <div className="min-w-[calc(100vw-208px)]">
+      <div className="min-w-[calc(100vw-208px)] overflow-y-auto">
         <Outlet></Outlet>
       </div>
     </div>

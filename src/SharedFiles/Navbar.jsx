@@ -4,10 +4,12 @@ import { useContext } from "react";
 import { AuthContext } from "./AuthProvider/AuthProvider";
 import { FaCartShopping } from "react-icons/fa6";
 import useCart from "../Hooks/useCart";
+import useAdmin from "../Hooks/useAdmin";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
   const [cart] = useCart();
-  console.log(cart.length)
+  console.log(cart.length);
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -110,6 +112,30 @@ const Navbar = () => {
                 <div className="badge badge-secondary">+{cart.length}</div>
               </button>
             </NavLink>
+          </li>
+          <li>
+            {user && !isAdmin && (
+              <NavLink
+                to="/dashboard/userHome"
+                className={({ isActive }) =>
+                  isActive ? "text-yellow-400 font-bold" : ""
+                }
+              >
+                Dashboard Link
+              </NavLink>
+            )}
+          </li>
+          <li>
+            {user && isAdmin && (
+              <NavLink
+                to="/dashboard/adminHome"
+                className={({ isActive }) =>
+                  isActive ? "text-yellow-400 font-bold" : ""
+                }
+              >
+                Dashboard Link
+              </NavLink>
+            )}
           </li>
         </ul>
       </div>

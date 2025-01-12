@@ -3,6 +3,7 @@ import TitleSection from "../../Components/TitleSection/TitleSection";
 import useCart from "../../Hooks/useCart";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
@@ -42,9 +43,17 @@ const Cart = () => {
       <div className="px-8 flex justify-between items-center">
         <h2 className="text-2xl font-bold">Total Order: {cart.length}</h2>
         <h2 className="text-2xl font-bold">Total Price : ${totalPrice}</h2>
-        <button className="px-4 py-2 bg-[#D1A054] text-white font-semibold">
-          PAY
-        </button>
+        {cart.length ? (
+          <Link to="/dashboard/payment">
+            <button className="px-4 py-2 bg-[#D1A054] text-white font-semibold">
+              PAY
+            </button>
+          </Link>
+        ) : (
+          <button disabled className="px-4 py-2 bg-[#D1A054] text-white font-semibold">
+            PAY
+          </button>
+        )}
       </div>
       <div className="px-8 py-4">
         <div className="overflow-x-auto">
@@ -68,7 +77,10 @@ const Cart = () => {
                   <td>{item.name}</td>
                   <td>${item.price}</td>
                   <td>
-                    <button className="btn bg-[#D1A054]" onClick={() => handleDelete(item._id)}>
+                    <button
+                      className="btn bg-[#D1A054]"
+                      onClick={() => handleDelete(item._id)}
+                    >
                       <MdDeleteForever className="text-2xl text-white"></MdDeleteForever>
                     </button>
                   </td>
